@@ -1,0 +1,33 @@
+﻿@namespace StkMS.Components
+
+<EditForm Model="_model" OnValidSubmit="RegisterUserAsync">
+    <FluentValidationValidator />
+
+    <MudCardContent>
+        <MudText Typo="Typo.h4" GutterBottom="true" Align="Align.Center">Înregistrează-te</MudText>
+        <hr />
+        <MudText>Ai deja un cont? <MudLink Href="Login">Conectează-te</MudLink></MudText>
+        <MudTextField Label="Email" HelperText="Required" @bind-Value="@_model.Email" Variant="Variant.Outlined" Adornment="Adornment.End" />
+        <MudTextField Label="Prenume" HelperText="Required" @bind-Value="@_model.FirstName" Variant="Variant.Outlined" Adornment="Adornment.End" />
+        <MudTextField Label="Nume" HelperText="Required" @bind-Value="@_model.LastName" Variant="Variant.Outlined" Adornment="Adornment.End" />
+        <MudTextField InputType="InputType.Password" Label="Parolă" HelperText="Required" @bind-Value="@_model.Password" Variant="Variant.Outlined" Adornment="Adornment.End" />
+        <MudTextField InputType="InputType.Password" Label="Confirmare Parolă" HelperText="Required" @bind-Value="@_model.ConfirmPassword" Variant="Variant.Outlined" Adornment="Adornment.End" />
+
+        <ValidationSummary />
+
+        @if (!string.IsNullOrWhiteSpace(_errorMessage))
+        {
+            <MudAlert Severity="Severity.Error" Class="my-2" Variant="Variant.Filled">@_errorMessage</MudAlert>
+        }
+    </MudCardContent>
+    @*<MudCheckBox @bind-Checked="@AgreeToTerms" Label="I agree to the terms and privacy" Color="Color.Primary" Class="ml-n1 my-3"></MudCheckBox>*@
+    <MudCardActions>
+        @*<MudButton ButtonType="MudBlazor.ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="_isBusy" OnClick="RedirectToLogin" Size="Size.Large" FullWidth="true">Register</MudButton>*@
+        <MudButton ButtonType="MudBlazor.ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="_isBusy" Size="Size.Large" FullWidth="true" OnClick="RedirectToLogin">Creează cont</MudButton>
+        @*<MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="RedirectToLogin" Class="ml-1" Disabled="_isBusy">Register</MudButton>*@
+    </MudCardActions>
+</EditForm>
+
+
+@code {
+}

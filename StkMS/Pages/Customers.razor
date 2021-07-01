@@ -1,0 +1,55 @@
+﻿@page "/Customers"
+@using StkMS.Library.Contracts
+@using StkMS.Library.Models
+@using StkMS.Services
+@using DialogService = Radzen.DialogService
+@inject IApiClient apiClient
+@inject DialogService dialogService
+
+<RadzenContent Container="main">
+    <ChildContent>
+        <RadzenHeading Size="H1" Text="Listă Clienți">
+        </RadzenHeading>
+        <div class="row">
+            <div class="col-md-12">
+                <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Adaugă" Click="@Button0Click">
+                </RadzenButton>
+                <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@count" Data="customers" LoadData="@LoadData" FilterMode="FilterMode.Advanced" TItem="Customer">
+                    <Columns>
+                        <RadzenGridColumn TItem="Customer" Property="CustomerId" Title="Customer Id" Visible="false">
+                        </RadzenGridColumn>
+                        <RadzenGridColumn TItem="Customer" Property="Name" Title="Nume">
+                        </RadzenGridColumn>
+                        <RadzenGridColumn TItem="Customer" Property="Description" Title="Categorie Produse">
+                        </RadzenGridColumn>
+                        <RadzenGridColumn TItem="Customer" Property="Address" Title="Adresă">
+                        </RadzenGridColumn>
+                        <RadzenGridColumn TItem="Customer" Property="City" Title="Oraș">
+                        </RadzenGridColumn>
+                    </Columns>
+                </RadzenGrid>
+            </div>
+        </div>
+    </ChildContent>
+</RadzenContent>
+
+
+@code { int count;
+
+    protected RadzenGrid<Customer> grid0;
+    IEnumerable<Customer> customers;
+
+    async Task LoadData(LoadDataArgs args)
+    {
+        var data = (await apiClient.GetAllCustomerAsync().ConfigureAwait(true)).ToArray();
+        customers = data;
+        count = data.Length;
+    }
+
+    protected async Task Button0Click(MouseEventArgs args)
+    {
+        var dialogResult = await dialogService.OpenAsync<AddCustomer>("Add Customer", null);
+        await grid0.Reload();
+
+        await InvokeAsync(() => { StateHasChanged(); });
+    } }

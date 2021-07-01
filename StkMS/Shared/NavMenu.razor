@@ -1,0 +1,49 @@
+﻿<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">
+        <img src="iconStkMS.png" width="45" height="45"/>  StkMS
+    </a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="StkMS" Match="NavLinkMatch.All">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Home
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Products" Match="NavLinkMatch.All">
+                <span class="oi oi-list" aria-hidden="true"></span> Produse
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Inventory" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Inventar
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Customers" Match="NavLinkMatch.All">
+                <span class="oi oi-people" aria-hidden="true"></span> Clienți
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Sales" Match="NavLinkMatch.All">
+                @*<MudIcon Icon="@Icons.Material.Rounded.PointOfSale"></MudIcon>*@
+                <span class="oi oi-bar-chart" aria-hidden="true"></span> Vânzări
+            </NavLink>
+        </li>
+    </ul>
+</div>
+
+
+@code { private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : "";
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    } }

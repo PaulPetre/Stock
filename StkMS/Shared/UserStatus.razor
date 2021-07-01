@@ -1,0 +1,11 @@
+﻿@namespace StkMS.Shared
+
+<AuthorizeView>
+    <span>Welcome @context.User.FindFirst("FirstName").Value</span>
+    &nbsp;
+    <RadzenButton Text="Logout" Click="Logout" class="mr-2" />
+</AuthorizeView>
+@code {
+
+
+}
